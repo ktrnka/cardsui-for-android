@@ -57,9 +57,11 @@ public class StackAdapter extends BaseAdapter {
 		// convertView.setTag(stack);
 		// }
 		// } else if (convertView == null) {
-		convertView = stack.getView(mContext, mSwipeable);
+		//convertView = stack.getView(mContext, mSwipeable);
 		// convertView.setTag(stack);
 		// }
+		
+		convertView = stack.getView(mContext, convertView, mSwipeable);
 
 		return convertView;
 	}

@@ -21,7 +21,7 @@ public class MyPlayCard extends Card {
 
 	@Override
 	public View getCardContent(Context context) {
-		View v = LayoutInflater.from(context).inflate(R.layout.card_play, null);
+		View v = LayoutInflater.from(context).inflate(getCardContentId(), null);
 		
 		((TextView) v.findViewById(R.id.title)).setText(titlePlay);
 		((TextView) v.findViewById(R.id.title)).setTextColor(Color
@@ -42,6 +42,17 @@ public class MyPlayCard extends Card {
 					.setVisibility(View.GONE);
 
 		return v;
+	}
+
+	@Override
+	public int getCardContentId() {
+		return R.layout.card_play;
+	}
+
+	@Override
+	public boolean convert(View convertCardView) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

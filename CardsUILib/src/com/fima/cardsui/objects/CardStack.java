@@ -55,13 +55,26 @@ public class CardStack extends AbstractCard {
 
 	@Override
 	public View getView(Context context) {
-		return getView(context, false);
+		return getView(context, null, false);
 	}
-
+	
 	@Override
 	public View getView(Context context, boolean swipable) {
+		return getView(context, null, swipable);
+	}
+
+	public View getView(Context context, View convertView, boolean swipable) {
 
 		mContext = context;
+		
+		// try to recycle views if possible
+		Log.d("com.github.ktrnka.droidling.CardStack", String.format("Checking to recycle view. convertView is %s", (convertView == null ? "null" : "not null")));
+		if (convertView != null) {
+			Log.d("com.github.ktrnka.droidling.CardStack", String.format("Checking types.  convertView is %d, need %d", convertView.getId(), R.id.stackRoot));
+			if (convertView.getId() == R.id.stackRoot)
+				if (convert(convertView))
+					return convertView;
+		}
 
 		final View view = LayoutInflater.from(context).inflate(
 				R.layout.item_stack, null);
@@ -145,6 +158,39 @@ public class CardStack extends AbstractCard {
 		}
 
 		return view;
+	}
+
+	private boolean convert(View convertView) {
+		// only convert singleton stacks
+		if (cards.size() != 1) {
+			Log.d("com.github.ktrnka.droidling.CardStack", "Can't convert view: num cards is " + cards.size());
+			return false;
+		}
+
+		RelativeLayout container = (RelativeLayout) convertView.findViewById(R.id.stackContainer);
+		if (container == null) {
+			Log.d("com.github.ktrnka.droidling.CardStack", "Can't convert view: can't find stackContainer");
+			return false;
+		}
+		
+		if (container.getChildCount() != 1) {
+			Log.d("com.github.ktrnka.droidling.CardStack", "Can't convert view: child count is " + container.getChildCount());
+			return false;
+		}
+		
+		// check to see if they're compatible Card types
+		Card card = cards.get(0);
+		View convertCardView = container.getChildAt(0);
+		
+		if (convertCardView == null || convertCardView.getId() != card.getId()) {
+			Log.d("com.github.ktrnka.droidling.CardStack", String.format("Can't convert view: child Id is 0x%x, card Id is 0x%x", convertCardView.getId(), card.getId()));
+			return false;
+		}
+		
+		if (card.convert(convertCardView))
+			return true;
+		
+		return false;
 	}
 
 	public Card remove(int index) {

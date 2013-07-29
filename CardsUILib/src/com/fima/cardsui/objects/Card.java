@@ -149,6 +149,8 @@ public abstract class Card extends AbstractCard {
     }
 
     public abstract View getCardContent(Context context);
+    
+	public abstract int getCardContentId();
 
     public OnClickListener getClickListener() {
         return mListener;
@@ -176,7 +178,11 @@ public abstract class Card extends AbstractCard {
     protected int getCardLayout() {
         return R.layout.item_card;
     }
-
+    
+    protected int getId() {
+    	return R.id.cardContent;
+    }
+    
     protected int getLastCardLayout() {
         return R.layout.item_card_empty_last;
     }
@@ -188,5 +194,7 @@ public abstract class Card extends AbstractCard {
     public interface OnCardSwiped {
         public void onCardSwiped(Card card, View layout);
     }
+
+	public abstract boolean convert(View convertCardView);
 
 }
