@@ -71,6 +71,7 @@ public class CardStack extends AbstractCard {
 		Log.d("com.github.ktrnka.droidling.CardStack", String.format("Checking to recycle view. convertView is %s", (convertView == null ? "null" : "not null")));
 		if (convertView != null) {
 			Log.d("com.github.ktrnka.droidling.CardStack", String.format("Checking types.  convertView is %d, need %d", convertView.getId(), R.id.stackRoot));
+			// can only convert something with the correct root element 
 			if (convertView.getId() == R.id.stackRoot)
 				if (convert(convertView))
 					return convertView;
@@ -160,6 +161,12 @@ public class CardStack extends AbstractCard {
 		return view;
 	}
 
+	/**
+	 * Attempt to modify the convertView instead of inflating a new View for this CardStack.
+	 * If convertView isn't compatible, it isn't modified.
+	 * @param convertView view to try reusing
+	 * @return true on success, false if the convertView is not compatible
+	 */
 	private boolean convert(View convertView) {
 		// only convert singleton stacks
 		if (cards.size() != 1) {

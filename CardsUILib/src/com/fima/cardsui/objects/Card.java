@@ -149,8 +149,6 @@ public abstract class Card extends AbstractCard {
     }
 
     public abstract View getCardContent(Context context);
-    
-	public abstract int getCardContentId();
 
     public OnClickListener getClickListener() {
         return mListener;
@@ -195,6 +193,13 @@ public abstract class Card extends AbstractCard {
         public void onCardSwiped(Card card, View layout);
     }
 
+    /**
+     * Attempt to reuse convertCardView.  Should not modify convertCardView if it's
+     * not compatible.  The implementer should check the card content part and
+     * verify that it matches.
+     * @param convertCardView the view to convert, with root Id equal to Card.getId()
+     * @return true on success, false if not compatible
+     */
 	public abstract boolean convert(View convertCardView);
 
 }

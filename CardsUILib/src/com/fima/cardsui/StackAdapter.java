@@ -45,22 +45,7 @@ public class StackAdapter extends BaseAdapter {
 		stack.setAdapter(this);
 		stack.setPosition(position);
 
-		// TODO: caching is not working well
-
-		// if (convertView != null) {
-		// CardStack tagStack = (CardStack) convertView.getTag();
-		// ArrayList<Card> tagCards = tagStack.getCards();
-		// ArrayList<Card> cards = stack.getCards();
-		// Card lastTagCard = tagCards.get(tagCards.size()-1);
-		// if (!lastTagCard.equals(cards.get(cards.size()-1))) {
-		// convertView = stack.getView(mContext);
-		// convertView.setTag(stack);
-		// }
-		// } else if (convertView == null) {
-		//convertView = stack.getView(mContext, mSwipeable);
-		// convertView.setTag(stack);
-		// }
-		
+		// the CardStack can decide whether to use convertView or not
 		convertView = stack.getView(mContext, convertView, mSwipeable);
 
 		return convertView;

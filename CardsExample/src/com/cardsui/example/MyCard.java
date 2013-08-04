@@ -23,7 +23,6 @@ public class MyCard extends Card {
 		return view;
 	}
 
-	@Override
 	public int getCardContentId() {
 		// TODO Auto-generated method stub
 		return 0;

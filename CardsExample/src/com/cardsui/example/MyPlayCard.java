@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
 import com.fima.cardsui.objects.Card;
@@ -44,7 +43,6 @@ public class MyPlayCard extends Card {
 		return v;
 	}
 
-	@Override
 	public int getCardContentId() {
 		return R.layout.card_play;
 	}

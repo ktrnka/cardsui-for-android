@@ -24,7 +24,6 @@ public class MyImageCard extends Card {
 		return view;
 	}
 
-	@Override
 	public int getCardContentId() {
 		return R.layout.card_picture;
 	}
