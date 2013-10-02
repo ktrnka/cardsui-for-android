@@ -1,40 +1,23 @@
 package com.cardsui.example;
 
-import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
-import com.fima.cardsui.objects.Card;
+import com.fima.cardsui.objects.RecyclableCard;
 
-public class MyCard extends Card {
+public class MyCard extends RecyclableCard {
 
 	public MyCard(String title){
 		super(title);
 	}
 
 	@Override
-	public View getCardContent(Context context) {
-		View view = LayoutInflater.from(context).inflate(R.layout.card_ex, null);
-
-		((TextView) view.findViewById(R.id.title)).setText(title);
-
-		
-		return view;
-	}
-
-	public int getCardContentId() {
-		// TODO Auto-generated method stub
-		return 0;
+	protected int getCardLayoutId() {
+		return R.layout.card_ex;
 	}
 
 	@Override
-	public boolean convert(View convertCardView) {
-		// TODO Auto-generated method stub
-		return false;
+	protected void applyTo(View convertView) {
+		((TextView) convertView.findViewById(R.id.title)).setText(title);
 	}
-
-	
-	
-	
 }
